@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4ede0"/>
+      <stop offset="100%" stop-color="#ebe1cc"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="30%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#7a3b2d" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#7a3b2d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="url(#bg-grad)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- 横线信纸 -->
+  <g opacity="0.1"><line x1="0" y1="80" x2="1200" y2="80" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="108" x2="1200" y2="108" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="136" x2="1200" y2="136" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="164" x2="1200" y2="164" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="192" x2="1200" y2="192" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="220" x2="1200" y2="220" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="248" x2="1200" y2="248" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="276" x2="1200" y2="276" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="304" x2="1200" y2="304" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="332" x2="1200" y2="332" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="360" x2="1200" y2="360" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="388" x2="1200" y2="388" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="416" x2="1200" y2="416" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="444" x2="1200" y2="444" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="472" x2="1200" y2="472" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="500" x2="1200" y2="500" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="528" x2="1200" y2="528" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="556" x2="1200" y2="556" stroke="#7a3b2d" stroke-width="1"/><line x1="0" y1="584" x2="1200" y2="584" stroke="#7a3b2d" stroke-width="1"/>
+  </g>
+  <!-- 邮票 -->
+  <rect x="1050" y="60" width="90" height="100" fill="none" stroke="#7a3b2d" stroke-width="2" stroke-dasharray="3,3"/>
+  <text x="1095" y="115" text-anchor="middle" font-family="STSong, serif" font-size="20" fill="#7a3b2d" font-weight="bold">湯</text>
+
+
+  <!-- 编号 + 区域 -->
+  <text x="60" y="75" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="4" fill="#7a3b2d" font-weight="bold">NO. 09 · 远方来信 · LETTERS FROM AFAR</text>
+
+  <!-- 主标题 中文 -->
+  <text x="60" y="320" font-family="STSong, 'Songti SC', serif" font-size="120" fill="#2a1f17" font-weight="700" letter-spacing="0.04em">温泉乡·漫游</text>
+
+  <!-- 主标题 英文 -->
+  <text x="60" y="380" font-family="JetBrains Mono, monospace" font-size="22" fill="#b35f1a" letter-spacing="8" font-weight="bold">ONSEN LETTERS</text>
+
+  <!-- Tagline -->
+  <text x="60" y="475" font-family="STSong, serif" font-size="34" fill="#2a1f17" font-weight="400" opacity="0.9">穿浴衣去走街</text>
+
+  <!-- 区域 -->
+  <text x="60" y="595" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="6" fill="#b35f1a" font-weight="bold">温泉乡</text>
+
+  <!-- 站点 URL -->
+  <text x="1140" y="595" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#7a3b2d" font-weight="bold">kary2999.github.io/onsen-letters/</text>
+</svg>
