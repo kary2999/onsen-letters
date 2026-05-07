@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>温泉乡·漫游 — ONSEN LETTERS</title>
+  <meta name="description" content="穿浴衣去走街">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">温泉乡·漫游</div>
+    <ul>
+      <li><a href="index.html">今日</a></li>
+      <li><a href="list.html">名录</a></li>
+      <li><a href="about.html">关于</a></li>
+    </ul>
+    <div class="meta">温泉乡</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="meta">NO. 09 · UPDATED DAILY · 温泉乡</div>
+      <h1>
+        ONSEN LETTERS
+        <span class="accent">穿浴衣去走街 · WALK IN A YUKATA</span>
+      </h1>
+      <p class="tagline">每天，从 15 个故事里翻一页。日期变了，故事就变了。</p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">TODAY · 今日</div>
+      <h2>今日推荐</h2>
+      <p class="lead">从 15 个真实地点里，按今日东京日期挑一个给你。</p>
+
+      <div class="tonight">
+        <article class="tonight-card">
+          <div class="img-frame" id="t-img" data-tag="—">
+            <div class="stamp">TODAY</div>
+            <div class="big-name" id="t-img-name">— —</div>
+          </div>
+          <div class="body">
+            <div class="ward" id="t-ward">— —</div>
+            <h3 class="name" id="t-name">— —</h3>
+            <div class="since" id="t-since">— —</div>
+            <div class="type" id="t-type">— —</div>
+            <div class="vibe" id="t-vibe">— —</div>
+            <p class="story" id="t-story">— —</p>
+            <div class="address" id="t-address" style="display:none">— —</div>
+            <div class="etiquette" id="t-etiquette" style="display:none">— —</div>
+            <div class="release" id="t-release" style="display:none">— —</div>
+          </div>
+        </article>
+
+        <article class="haiku-card" data-label="汤之記">
+          <div class="haiku" id="haiku">— —</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-label">INDEX · 全部 15 个</div>
+      <h2>温泉乡·漫游·名录</h2>
+      <p class="lead">十五处真实地点，十五种打开方式。</p>
+      <div class="list-section" id="all-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <div>温泉乡·漫游 · 温泉乡 · UPDATED <span id="footer-date">2026.05.07</span></div>
+      <div class="disclaimer">店面 / 营业时间 / 票务规则以官方为准。建议出发前通过官方网站核实。</div>
+    </div>
+    <div>© 2026 · 远方来信系列 · NO. 09</div>
+  </footer>
+
+  <script>
+    function jstSeed() {
+      const d = new Date();
+      const jst = new Date(d.getTime() + (d.getTimezoneOffset() + 540) * 60000);
+      return jst.getFullYear() * 10000 + (jst.getMonth() + 1) * 100 + jst.getDate();
+    }
+    function pad(n, w) { return String(n).padStart(w, '0'); }
+    const dataKey = "spots";
+    const haikuKey = "phrases";
+
+    fetch('data/pool.json').then(r => r.json()).then(data => {
+      const seed = jstSeed();
+      const list = data[dataKey];
+      const phrases = data[haikuKey];
+      const today = list[seed % list.length];
+      const phrase = phrases[seed % phrases.length];
+
+      const dispName = today.name_zh || today.name;
+      document.getElementById('t-name').textContent = dispName;
+      document.getElementById('t-img-name').textContent = dispName;
+      document.getElementById('t-ward').textContent = today.ward;
+      document.getElementById('t-since').textContent = today.since ? 'EST. ' + today.since : '';
+      document.getElementById('t-type').textContent = today.type || '';
+      document.getElementById('t-vibe').textContent = today.vibe || '';
+      document.getElementById('t-story').textContent = today.story || '';
+      document.getElementById('haiku').textContent = phrase;
+
+      const tImg = document.getElementById('t-img');
+      tImg.style.setProperty('--tone', today.color || 'var(--accent)');
+      tImg.setAttribute('data-tag', (today.tag || 'spot').toUpperCase());
+
+      // 地址 + Google Maps
+      const addr = today.address || today.ward;
+      if (addr) {
+        const ae = document.getElementById('t-address');
+        const gmapQuery = encodeURIComponent((today.name_zh || today.name) + ' ' + (today.ward || ''));
+        ae.innerHTML = addr + ' <a class="gmap-link" href="https://www.google.com/maps/search/?api=1&query=' + gmapQuery + '" target="_blank" rel="noopener">查看地图 ↗</a>';
+        ae.style.display = '';
+      }
+      // 礼仪提示（飞田新地等）
+      if (today.etiquette) {
+        const et = document.getElementById('t-etiquette');
+        et.textContent = '⚠ ' + today.etiquette;
+        et.style.display = '';
+      }
+      // 票务规则（japan-tickets）
+      if (today.release_rule) {
+        const r = document.getElementById('t-release');
+        r.innerHTML = '<strong>放票规则：</strong>' + today.release_rule + '<br><strong>提前：</strong>约 ' + (today.advance_days || '?') + ' 天<br><strong>购票：</strong>' + (today.booking_site || '官方');
+        r.style.display = '';
+      }
+
+      // 列表
+      const listEl = document.getElementById('all-list');
+      list.forEach(s => {
+        const item = document.createElement('div');
+        item.className = 'list-item';
+        const sName = s.name_zh || s.name;
+        const tone = s.color || 'var(--accent)';
+        const tag = (s.tag || 'spot').toUpperCase();
+        const addr = s.address || s.ward;
+        const gmapQuery = encodeURIComponent(sName + ' ' + (s.ward || ''));
+        const gmapLink = `<a class="gmap-link" href="https://www.google.com/maps/search/?api=1&query=${gmapQuery}" target="_blank" rel="noopener">地图 ↗</a>`;
+        item.innerHTML = `
+          <div class="thumb" style="--tone:${tone}" data-tag="${tag}">
+            <div class="big-name">${sName}</div>
+          </div>
+          <div class="body">
+            <div class="num">NO. ${pad(s.id, 2)}</div>
+            <div class="name">${sName}</div>
+            <div class="meta-line">${s.ward} · ${s.since || '—'}</div>
+            <div class="vibe">${s.vibe || ''}</div>
+            ${addr ? `<div class="address">${addr} ${gmapLink}</div>` : ''}
+          </div>
+        `;
+        listEl.appendChild(item);
+      });
+
+      const now = new Date();
+      const jst = new Date(now.getTime() + (now.getTimezoneOffset() + 540) * 60000);
+      document.getElementById('footer-date').textContent =
+        jst.getFullYear() + '.' + pad(jst.getMonth()+1, 2) + '.' + pad(jst.getDate(), 2);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>名录 — 温泉乡·漫游</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">温泉乡·漫游</div>
+    <ul>
+      <li><a href="index.html">今日</a></li>
+      <li><a href="list.html" style="color:var(--accent)">名录</a></li>
+      <li><a href="about.html">关于</a></li>
+    </ul>
+    <div class="meta">INDEX</div>
+  </header>
+
+  <main>
+    <section class="detail-hero">
+      <div class="crumb">温泉乡·漫游 / 名录</div>
+      <h1>温泉乡·漫游<br>十五·名录</h1>
+      <p class="deck">把 15 个地方平铺地放在一起。每一格都是一段故事，一个地址。</p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">FULL · 全部 15 个</div>
+      <div class="list-section" id="all-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div>温泉乡·漫游 · 名录 · 温泉乡</div>
+    <div>© 2026 · 远方来信系列 · NO. 09</div>
+  </footer>
+
+  <script>
+    function pad(n, w) { return String(n).padStart(w, '0'); }
+    fetch('data/pool.json').then(r => r.json()).then(data => {
+      const list = data['spots'];
+      const listEl = document.getElementById('all-list');
+      list.forEach(s => {
+        const item = document.createElement('div');
+        item.className = 'list-item';
+        const sName = s.name_zh || s.name;
+        const tone = s.color || 'var(--accent)';
+        const tag = (s.tag || 'spot').toUpperCase();
+        const addr = s.address || s.ward;
+        const gmapQuery = encodeURIComponent(sName + ' ' + (s.ward || ''));
+        const gmapLink = `<a class="gmap-link" href="https://www.google.com/maps/search/?api=1&query=${gmapQuery}" target="_blank" rel="noopener">地图 ↗</a>`;
+        item.innerHTML = `
+          <div class="thumb" style="--tone:${tone}" data-tag="${tag}">
+            <div class="big-name">${sName}</div>
+          </div>
+          <div class="body">
+            <div class="num">NO. ${pad(s.id, 2)}</div>
+            <div class="name">${sName}</div>
+            <div class="meta-line">${s.ward} · ${s.since || '—'}</div>
+            <div class="vibe">${s.vibe || ''}</div>
+            ${addr ? `<div class="address">${addr} ${gmapLink}</div>` : ''}
+          </div>
+        `;
+        listEl.appendChild(item);
+      });
+    });
+  </script>
+</body>
+</html>

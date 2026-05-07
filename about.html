@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于 — 温泉乡·漫游</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">温泉乡·漫游</div>
+    <ul>
+      <li><a href="index.html">今日</a></li>
+      <li><a href="list.html">名录</a></li>
+      <li><a href="about.html" style="color:var(--accent)">关于</a></li>
+    </ul>
+    <div class="meta">ABOUT</div>
+  </header>
+
+  <main>
+    <section class="detail-hero">
+      <div class="crumb">温泉乡·漫游 / ABOUT</div>
+      <h1>关于<br>这本帖子</h1>
+      <p class="deck">每天给你一个故事，一个地址，一句话。日期变了，翻到下一页。</p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">CONCEPT · 概念</div>
+      <h2>穿浴衣去走街</h2>
+      <p class="lead" style="font-size:18px;color:var(--ink);max-width:760px;line-height:2.2">
+        这是「远方来信 · 日本系列」的一封。每天客户端按东京日期种子翻一页，本地定时器每天 commit + push 一次给 GitHub 一格新绿色。
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">DAILY · 机制</div>
+      <h2>每日如何更新</h2>
+      <div class="tonight">
+        <article class="tonight-card" style="background:var(--bg-2)">
+          <div class="body">
+            <div class="ward">CLIENT</div>
+            <h3 class="name" style="font-size:24px">浏览器端选取</h3>
+            <div class="type">JST 时区·同日恒定</div>
+            <p class="story">JS 用东京日期种子，从 15 个里选今日。同一天看到同一个。</p>
+          </div>
+        </article>
+        <article class="tonight-card" style="background:var(--bg-2)">
+          <div class="body">
+            <div class="ward">SERVER</div>
+            <h3 class="name" style="font-size:24px">本地定时器 push</h3>
+            <div class="type">每日 00:30 JST</div>
+            <p class="story">launchd / cron 每天跑 daily.py，给 git 历史一格绿色。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-label">SERIES · 系列</div>
+      <h2>「远方来信 · 日本」十封</h2>
+      <p class="lead" style="font-size:17px;color:var(--ink-2);max-width:780px;line-height:2.4">
+        东京·深夜食堂 / 京都·茶寮帖 / 大阪·吃倒 / 北海道·雪国食单 / 温泉·怀石 / 冲绳·居酒屋 / 便利店之诗 / 关东·四季 / 温泉乡漫游 / 日本·游乐场票务
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div>温泉乡·漫游 · 关于 · 温泉乡</div>
+    <div>© 2026 · 远方来信系列 · NO. 09</div>
+  </footer>
+</body>
+</html>
